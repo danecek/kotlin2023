@@ -13,7 +13,6 @@ class Num2(override val value: Int) : Expr*/
 
 data class Num(override val value: Int) : Expr {
     override val infix = value.toString()
-
 }
 
 enum class Oper(val txt: String){
@@ -23,7 +22,8 @@ enum class Oper(val txt: String){
 
 data class BinOp(val op: Oper, val left: Expr, val right: Expr): Expr {
     override val infix: String = "${left.infix} $op ${right.infix}"
-    override val value = when (op) {
+    override val value: Int
+        get() = when (op) {
             Oper.PLS -> left.value + right.value
             Oper.MLT -> left.value * right.value
         }
